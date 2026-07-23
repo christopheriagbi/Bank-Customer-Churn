@@ -1,0 +1,74 @@
+// BANK CUSTOMER CHURN ANALYSIS DAX
+// Table: Bank_Customers
+
+Total Customers =
+COUNTROWS(Bank_Customers)
+
+Total Balance =
+SUM(Bank_Customers[Balance])
+
+Customer Churn =
+CALCULATE(COUNTROWS(Bank_Customers), Bank_Customers[Exited]=1)
+
+Churn Rate % =
+DIVIDE([Customer Churn],[Total Customers],0)
+
+Active Customers =
+CALCULATE(COUNTROWS(Bank_Customers), Bank_Customers[IsActiveMember]=1)
+
+Active Customer % =
+DIVIDE([Active Customers],[Total Customers],0)
+
+Inactive Customers =
+CALCULATE(COUNTROWS(Bank_Customers), Bank_Customers[IsActiveMember]=0)
+
+Average Age =
+AVERAGE(Bank_Customers[Age])
+
+Average Balance =
+AVERAGE(Bank_Customers[Balance])
+
+Average Salary =
+AVERAGE(Bank_Customers[EstimatedSalary])
+
+Countries =
+DISTINCTCOUNT(Bank_Customers[Geography])
+
+Male Customers =
+CALCULATE(COUNTROWS(Bank_Customers), Bank_Customers[Gender]="Male")
+
+Female Customers =
+CALCULATE(COUNTROWS(Bank_Customers), Bank_Customers[Gender]="Female")
+
+Male Balance =
+CALCULATE(SUM(Bank_Customers[Balance]), Bank_Customers[Gender]="Male")
+
+Female Balance =
+CALCULATE(SUM(Bank_Customers[Balance]), Bank_Customers[Gender]="Female")
+
+Germany Churn =
+CALCULATE([Customer Churn], Bank_Customers[Geography]="Germany")
+
+France Churn =
+CALCULATE([Customer Churn], Bank_Customers[Geography]="France")
+
+Spain Churn =
+CALCULATE([Customer Churn], Bank_Customers[Geography]="Spain")
+
+Selected Country =
+SELECTEDVALUE(Bank_Customers[Geography],"All Countries")
+
+Selected Churn Status =
+SELECTEDVALUE(Bank_Customers[Churn Status],"All")
+
+Dashboard Title =
+"Bank Customer Churn Analysis"
+
+Average Credit Score =
+AVERAGE(Bank_Customers[CreditScore])
+
+Average Products =
+AVERAGE(Bank_Customers[NumOfProducts])
+
+Total Salary =
+SUM(Bank_Customers[EstimatedSalary])
